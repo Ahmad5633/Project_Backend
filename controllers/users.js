@@ -12,15 +12,6 @@ const UserController = {
             res.status(500).send(error);
         }
     },
-    // getById : async (req, res) => {
-    //     try {
-            
-    //         const user = await userModel.findById(req.params.id);
-    //         res.send(user);
-    //     } catch (error) {
-    //         res.status(500).send(error);
-    //     }
-    // },
     getById: [authenticate, async (req, res) => {
         try {
             const user = await userModel.findById(req.params.id);
@@ -92,7 +83,7 @@ const UserController = {
             res.status(500).send(error);
         }
     },
-    update :[authenticate , async (req, res) => {
+    updateUserById :[authenticate , async (req, res) => {
         try {
             const user = await userModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(user);
@@ -100,7 +91,7 @@ const UserController = {
             res.status(500).send(error);
         }
     }],
-    delete : [authenticate , async (req, res) => {
+    deleteUserById : [authenticate , async (req, res) => {
         try {
             const user = await userModel.findByIdAndDelete(req.params.id);
             res.send(user);

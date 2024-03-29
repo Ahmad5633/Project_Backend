@@ -3,7 +3,6 @@ const validate = (schema) => (req, res, next) => {
 	if (error) {
 		res.status(400).send(error);
 	} else {
-		// If there's no error, move on to the next middleware
 		next();
 	}
 };

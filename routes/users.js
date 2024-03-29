@@ -9,7 +9,7 @@ router.get("/:id/streams",UserController.getStreams);
 router.get("/:id/streams/:streamId",UserController.getStreamsById);
 router.post("/registration", UserController.register);
 router.post("/login",UserController.login);
-router.patch("/:id", UserController.update);
-router.delete("/:id", UserController.delete);
+router.patch("/:id", UserController.updateUserById);
+router.delete("/:id", UserController.deleteUserById);
 
 export default router;
