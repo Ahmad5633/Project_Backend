@@ -1,6 +1,5 @@
 
 import genreModel from "../models/genre.js";
-import jwt from "jsonwebtoken";
 import authenticate from "../middlewares/authenticate.js";
 const GenreController = {
 
