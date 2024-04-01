@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import userroutes from "./routes/users.js";
 import genreroutes from "./routes/genre.js";
 import seriesroutes from "./routes/series.js";
+import fileroutes from "./routes/file.js";
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use(express.urlencoded());
 app.use("/users",userroutes);
 app.use("/genres",genreroutes);
 app.use("/series",seriesroutes);
+app.use("/files",fileroutes)
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI,{
