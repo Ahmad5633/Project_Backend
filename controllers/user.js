@@ -1,26 +1,25 @@
-
 import UerModel from "../models/users.js";
 import JWT from "jsonwebtoken";
 import Authenticate from "../middlewares/authenticate.js";
 const UserController = {
 
-    getAll :async (req, res)=> {
+    getAll :[Authenticate ,async (req, res)=> {
         try {
             const users = await UerModel.find();
             res.send(users);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    getById: async (req, res) => {
+    }],
+    getById:[Authenticate , async (req, res) => {
         try {
             const user = await UerModel.findById(req.params.id);
             res.send(user);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    getStreams : async (req, res) => {
+    }],
+    getStreams :[Authenticate , async (req, res) => {
         try {
             const streams = await UerModel.aggregate([
                 {
@@ -39,8 +38,8 @@ const UserController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
-    getStreamsById : async (req, res) => {
+    }],
+    getStreamsById :[Authenticate , async (req, res) => {
         try {
             const userId = req.params.userId;
             const streamId = req.params.streamId;
@@ -59,7 +58,7 @@ const UserController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
+    }],
     register : async (req, res) => {
         try {
             const user = await UerModel.create(req.body);

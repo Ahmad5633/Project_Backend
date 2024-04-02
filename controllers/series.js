@@ -2,23 +2,23 @@ import SeriesModel from "../models/series.js";
 import Authenticate from "../middlewares/authenticate.js";
 const SeriesController = {
 
-    getAll :async (req, res)=> {
+    getAll :[Authenticate ,async (req, res)=> {
         try {
             const series = await SeriesModel.find();
             res.send(series);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    getById: async (req, res) => {
+    }],
+    getById:[Authenticate , async (req, res) => {
         try {
             const serie = await SeriesModel.findById(req.params.id);
             res.send(serie);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    getSeasonsBySeriesId: async (req, res) => {
+    }],
+    getSeasonsBySeriesId: [Authenticate ,async (req, res) => {
         try {
             const seriesId = mongoose.Types.ObjectId(req.params.id);
     
@@ -28,8 +28,8 @@ const SeriesController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
-    getEpisodesBySeriesId: async (req, res) => {
+    }],
+    getEpisodesBySeriesId:[Authenticate , async (req, res) => {
         try {
             const seriesId = mongoose.Types.ObjectId(req.params.id);
     
@@ -47,16 +47,16 @@ const SeriesController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
+    }],
     
-    create : async (req, res) => {
+    create :[Authenticate , async (req, res) => {
         try {
             const series = await SeriesModel.create(req.body);
             res.send(series);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
+    }],
     updateSeriesById :[Authenticate , async (req, res) => {
         try {
             const series = await SeriesModel.findByIdAndUpdate(req.params.id, req.body);

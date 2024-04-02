@@ -1,25 +1,25 @@
 
 import GenreModel from "../models/genre.js";
-import authenticate from "../middlewares/authenticate.js";
+import Authenticate from "../middlewares/authenticate.js";
 const GenreController = {
 
-    getAll :async (req, res)=> {
+    getAll :[Authenticate ,async (req, res)=> {
         try {
             const genres = await GenreModel.find();
             res.send(genres);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    getById: async (req, res) => {
+    }],
+    getById:[Authenticate , async (req, res) => {
         try {
             const genre = await GenreModel.findById(req.params.id);
             res.send(genre);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    getSeriesByGenreId: async (req, res) => {
+    }],
+    getSeriesByGenreId:[Authenticate , async (req, res) => {
         try {
             const genreId = mongoose.Types.ObjectId(req.params.id);
     
@@ -29,9 +29,9 @@ const GenreController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
+    }],
     
-    getSeasons: async (req, res) => {
+    getSeasons:[Authenticate , async (req, res) => {
         try {
             const genreId = mongoose.Types.ObjectId(req.params.id);
     
@@ -67,16 +67,16 @@ const GenreController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
+    }],
     
-    create : async (req, res) => {
+    create :[Authenticate , async (req, res) => {
         try {
             const genre = await GenreModel.create(req.body);
             res.send(genre);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
+    }],
     updateGenreById :[Authenticate , async (req, res) => {
         try {
             const genre = await GenreModel.findByIdAndUpdate(req.params.id, req.body);
