@@ -1,25 +1,24 @@
-
-import seriesModel from "../models/series.js";
-import authenticate from "../middlewares/authenticate.js";
+import SeriesModel from "../models/series.js";
+import Authenticate from "../middlewares/authenticate.js";
 const SeriesController = {
 
-    getAll :async (req, res)=> {
+    getAll :[Authenticate ,async (req, res)=> {
         try {
-            const series = await seriesModel.find();
+            const series = await SeriesModel.find();
             res.send(series);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    getById: [authenticate, async (req, res) => {
+    }],
+    getById:[Authenticate , async (req, res) => {
         try {
-            const serie = await seriesModel.findById(req.params.id);
+            const serie = await SeriesModel.findById(req.params.id);
             res.send(serie);
         } catch (error) {
             res.status(500).send(error);
         }
     }],
-    getSeasonsBySeriesId: async (req, res) => {
+    getSeasonsBySeriesId: [Authenticate ,async (req, res) => {
         try {
             const seriesId = mongoose.Types.ObjectId(req.params.id);
     
@@ -29,12 +28,12 @@ const SeriesController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
-    getEpisodesBySeriesId: async (req, res) => {
+    }],
+    getEpisodesBySeriesId:[Authenticate , async (req, res) => {
         try {
             const seriesId = mongoose.Types.ObjectId(req.params.id);
     
-            const series = await seriesModel.findById(seriesId);
+            const series = await SeriesModel.findById(seriesId);
     
             if (!series) {
                 return res.status(404).json({ message: "Series not found" });
@@ -48,27 +47,27 @@ const SeriesController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    },
+    }],
     
-    create : async (req, res) => {
+    create :[Authenticate , async (req, res) => {
         try {
-            const series = await seriesModel.create(req.body);
-            res.send(series);
-        } catch (error) {
-            res.status(500).send(error);
-        }
-    },
-    updateSeriesById :[authenticate , async (req, res) => {
-        try {
-            const series = await seriesModel.findByIdAndUpdate(req.params.id, req.body);
+            const series = await SeriesModel.create(req.body);
             res.send(series);
         } catch (error) {
             res.status(500).send(error);
         }
     }],
-    deleteSeriesById : [authenticate , async (req, res) => {
+    updateSeriesById :[Authenticate , async (req, res) => {
         try {
-            const series = await seriesModel.findByIdAndDelete(req.params.id);
+            const series = await SeriesModel.findByIdAndUpdate(req.params.id, req.body);
+            res.send(series);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }],
+    deleteSeriesById : [Authenticate , async (req, res) => {
+        try {
+            const series = await SeriesModel.findByIdAndDelete(req.params.id);
             res.send(series);
         } catch (error) {
             res.status(500).send(error);
