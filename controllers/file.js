@@ -1,6 +1,6 @@
 
 import FileModel from "../models/file.js";
-import authenticate from "../middlewares/authenticate.js";
+import Authenticate from "../middlewares/authenticate.js";
 const FileController = {
 
     getAll :async (req, res)=> {
@@ -11,14 +11,14 @@ const FileController = {
             res.status(500).send(error);
         }
     },
-    getById: [authenticate, async (req, res) => {
+    getById: async (req, res) => {
         try {
             const file = await FileModel.findById(req.params.id);
             res.send(file);
         } catch (error) {
             res.status(500).send(error);
         }
-    }],
+    },
    
     create : async (req, res) => {
         try {
@@ -28,7 +28,7 @@ const FileController = {
             res.status(500).send(error);
         }
     },
-    updateFileById :[authenticate , async (req, res) => {
+    updateFileById :[Authenticate , async (req, res) => {
         try {
             const file = await FileModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(file);
@@ -36,7 +36,7 @@ const FileController = {
             res.status(500).send(error);
         }
     }],
-    deleteFileById : [authenticate , async (req, res) => {
+    deleteFileById : [Authenticate , async (req, res) => {
         try {
             const file = await FileModel.findByIdAndDelete(req.params.id);
             res.send(file);

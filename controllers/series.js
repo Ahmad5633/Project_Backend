@@ -1,6 +1,5 @@
-
 import SeriesModel from "../models/series.js";
-import authenticate from "../middlewares/authenticate.js";
+import Authenticate from "../middlewares/authenticate.js";
 const SeriesController = {
 
     getAll :async (req, res)=> {
@@ -11,14 +10,14 @@ const SeriesController = {
             res.status(500).send(error);
         }
     },
-    getById: [authenticate, async (req, res) => {
+    getById: async (req, res) => {
         try {
             const serie = await SeriesModel.findById(req.params.id);
             res.send(serie);
         } catch (error) {
             res.status(500).send(error);
         }
-    }],
+    },
     getSeasonsBySeriesId: async (req, res) => {
         try {
             const seriesId = mongoose.Types.ObjectId(req.params.id);
@@ -58,7 +57,7 @@ const SeriesController = {
             res.status(500).send(error);
         }
     },
-    updateSeriesById :[authenticate , async (req, res) => {
+    updateSeriesById :[Authenticate , async (req, res) => {
         try {
             const series = await SeriesModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(series);
@@ -66,7 +65,7 @@ const SeriesController = {
             res.status(500).send(error);
         }
     }],
-    deleteSeriesById : [authenticate , async (req, res) => {
+    deleteSeriesById : [Authenticate , async (req, res) => {
         try {
             const series = await SeriesModel.findByIdAndDelete(req.params.id);
             res.send(series);

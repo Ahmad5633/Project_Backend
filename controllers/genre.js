@@ -11,14 +11,14 @@ const GenreController = {
             res.status(500).send(error);
         }
     },
-    getById: [authenticate, async (req, res) => {
+    getById: async (req, res) => {
         try {
             const genre = await GenreModel.findById(req.params.id);
             res.send(genre);
         } catch (error) {
             res.status(500).send(error);
         }
-    }],
+    },
     getSeriesByGenreId: async (req, res) => {
         try {
             const genreId = mongoose.Types.ObjectId(req.params.id);
@@ -77,7 +77,7 @@ const GenreController = {
             res.status(500).send(error);
         }
     },
-    updateGenreById :[authenticate , async (req, res) => {
+    updateGenreById :[Authenticate , async (req, res) => {
         try {
             const genre = await GenreModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(genre);
@@ -85,7 +85,7 @@ const GenreController = {
             res.status(500).send(error);
         }
     }],
-    deleteGenreById : [authenticate , async (req, res) => {
+    deleteGenreById : [Authenticate , async (req, res) => {
         try {
             const genre = await GenreModel.findByIdAndDelete(req.params.id);
             res.send(genre);

@@ -1,6 +1,6 @@
 
 import SeasonModel from "../models/season.js";
-import authenticate from "../middlewares/authenticate.js";
+import Authenticate from "../middlewares/authenticate.js";
 const SeasonController = {
 
     getAll :async (req, res)=> {
@@ -38,15 +38,15 @@ const SeasonController = {
             res.status(500).send(error);
         }
     },
-    updateSeasonById : async (req, res) => {
+    updateSeasonById :[Authenticate , async (req, res) => {
         try {
             const season = await SeasonModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(season);
         } catch (error) {
             res.status(500).send(error);
         }
-    },
-    deleteSeasonById : [authenticate , async (req, res) => {
+    }],
+    deleteSeasonById : [Authenticate , async (req, res) => {
         try {
             const season = await SeasonModel.findByIdAndDelete(req.params.id);
             res.send(season);

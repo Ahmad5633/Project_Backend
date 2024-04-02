@@ -1,7 +1,7 @@
 
 import UerModel from "../models/users.js";
-import jwt from "jsonwebtoken";
-import authenticate from "../middlewares/authenticate.js";
+import JWT from "jsonwebtoken";
+import Authenticate from "../middlewares/authenticate.js";
 const UserController = {
 
     getAll :async (req, res)=> {
@@ -12,14 +12,14 @@ const UserController = {
             res.status(500).send(error);
         }
     },
-    getById: [authenticate, async (req, res) => {
+    getById: async (req, res) => {
         try {
             const user = await UerModel.findById(req.params.id);
             res.send(user);
         } catch (error) {
             res.status(500).send(error);
         }
-    }],
+    },
     getStreams : async (req, res) => {
         try {
             const streams = await UerModel.aggregate([
@@ -75,7 +75,7 @@ const UserController = {
                 password: req.body.password,
             });
             if (!user) return res.status(401).send("Invalid email or password.");
-            const token = jwt.sign({ id: user._id }, "my_temporary_secret", {
+            const token = JWT.sign({ id: user._id }, "my_temporary_secret", {
                 expiresIn: "1h",
             });
             res.send(token);
@@ -83,7 +83,7 @@ const UserController = {
             res.status(500).send(error);
         }
     },
-    updateUserById :[authenticate , async (req, res) => {
+    updateUserById :[Authenticate , async (req, res) => {
         try {
             const user = await UerModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(user);
@@ -91,7 +91,7 @@ const UserController = {
             res.status(500).send(error);
         }
     }],
-    deleteUserById : [authenticate , async (req, res) => {
+    deleteUserById : [Authenticate , async (req, res) => {
         try {
             const user = await UerModel.findByIdAndDelete(req.params.id);
             res.send(user);
