@@ -1,12 +1,12 @@
 
 
-import episodeModel from "../models/episode.js";
+import EpisodeModel from "../models/episode.js";
 import authenticate from "../middlewares/authenticate.js";
 const EpisodeController = {
 
     getAll :async (req, res)=> {
         try {
-            const episodes = await episodeModel.find();
+            const episodes = await EpisodeModel.find();
             res.send(episodes);
         } catch (error) {
             res.status(500).send(error);
@@ -14,7 +14,7 @@ const EpisodeController = {
     },
     getById: [authenticate, async (req, res) => {
         try {
-            const episode = await episodeModel.findById(req.params.id);
+            const episode = await EpisodeModel.findById(req.params.id);
             res.send(episode);
         } catch (error) {
             res.status(500).send(error);
@@ -34,7 +34,7 @@ const EpisodeController = {
    
     create : async (req, res) => {
         try {
-            const newEpisode = await episodeModel.create(req.body);
+            const newEpisode = await EpisodeModel.create(req.body);
             res.send(newEpisode);
         } catch (error) {
             res.status(500).send(error);
@@ -42,7 +42,7 @@ const EpisodeController = {
     },
     updateEpisodeById :[authenticate , async (req, res) => {
         try {
-            const episode = await episodeModel.findByIdAndUpdate(req.params.id, req.body);
+            const episode = await EpisodeModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(episode);
         } catch (error) {
             res.status(500).send(error);
@@ -50,7 +50,7 @@ const EpisodeController = {
     }],
     deleteEpisodeById : [authenticate , async (req, res) => {
         try {
-            const episode = await episodeModel.findByIdAndDelete(req.params.id);
+            const episode = await EpisodeModel.findByIdAndDelete(req.params.id);
             res.send(episode);
         } catch (error) {
             res.status(500).send(error);

@@ -1,12 +1,12 @@
 
-import userModel from "../models/users.js";
+import UerModel from "../models/users.js";
 import jwt from "jsonwebtoken";
 import authenticate from "../middlewares/authenticate.js";
 const UserController = {
 
     getAll :async (req, res)=> {
         try {
-            const users = await userModel.find();
+            const users = await UerModel.find();
             res.send(users);
         } catch (error) {
             res.status(500).send(error);
@@ -14,7 +14,7 @@ const UserController = {
     },
     getById: [authenticate, async (req, res) => {
         try {
-            const user = await userModel.findById(req.params.id);
+            const user = await UerModel.findById(req.params.id);
             res.send(user);
         } catch (error) {
             res.status(500).send(error);
@@ -22,7 +22,7 @@ const UserController = {
     }],
     getStreams : async (req, res) => {
         try {
-            const streams = await userModel.aggregate([
+            const streams = await UerModel.aggregate([
                 {
                     $match: { _id: mongoose.Types.ObjectId(req.params.id) }
                 },
@@ -45,7 +45,7 @@ const UserController = {
             const userId = req.params.userId;
             const streamId = req.params.streamId;
     
-            const user = await userModel.findById(userId);
+            const user = await UerModel.findById(userId);
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
@@ -62,7 +62,7 @@ const UserController = {
     },
     register : async (req, res) => {
         try {
-            const user = await userModel.create(req.body);
+            const user = await UerModel.create(req.body);
             res.send(user);
         } catch (error) {
             res.status(500).send(error);
@@ -70,7 +70,7 @@ const UserController = {
     },
     login : async (req, res) => {
         try {
-            const user = await userModel.findOne({
+            const user = await UerModel.findOne({
                 email: req.body.email,
                 password: req.body.password,
             });
@@ -85,7 +85,7 @@ const UserController = {
     },
     updateUserById :[authenticate , async (req, res) => {
         try {
-            const user = await userModel.findByIdAndUpdate(req.params.id, req.body);
+            const user = await UerModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(user);
         } catch (error) {
             res.status(500).send(error);
@@ -93,7 +93,7 @@ const UserController = {
     }],
     deleteUserById : [authenticate , async (req, res) => {
         try {
-            const user = await userModel.findByIdAndDelete(req.params.id);
+            const user = await UerModel.findByIdAndDelete(req.params.id);
             res.send(user);
         } catch (error) {
             res.status(500).send(error);

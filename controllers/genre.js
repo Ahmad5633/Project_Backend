@@ -1,11 +1,11 @@
 
-import genreModel from "../models/genre.js";
+import GenreModel from "../models/genre.js";
 import authenticate from "../middlewares/authenticate.js";
 const GenreController = {
 
     getAll :async (req, res)=> {
         try {
-            const genres = await genreModel.find();
+            const genres = await GenreModel.find();
             res.send(genres);
         } catch (error) {
             res.status(500).send(error);
@@ -13,7 +13,7 @@ const GenreController = {
     },
     getById: [authenticate, async (req, res) => {
         try {
-            const genre = await genreModel.findById(req.params.id);
+            const genre = await GenreModel.findById(req.params.id);
             res.send(genre);
         } catch (error) {
             res.status(500).send(error);
@@ -71,7 +71,7 @@ const GenreController = {
     
     create : async (req, res) => {
         try {
-            const genre = await genreModel.create(req.body);
+            const genre = await GenreModel.create(req.body);
             res.send(genre);
         } catch (error) {
             res.status(500).send(error);
@@ -79,7 +79,7 @@ const GenreController = {
     },
     updateGenreById :[authenticate , async (req, res) => {
         try {
-            const genre = await genreModel.findByIdAndUpdate(req.params.id, req.body);
+            const genre = await GenreModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(genre);
         } catch (error) {
             res.status(500).send(error);
@@ -87,7 +87,7 @@ const GenreController = {
     }],
     deleteGenreById : [authenticate , async (req, res) => {
         try {
-            const genre = await genreModel.findByIdAndDelete(req.params.id);
+            const genre = await GenreModel.findByIdAndDelete(req.params.id);
             res.send(genre);
         } catch (error) {
             res.status(500).send(error);

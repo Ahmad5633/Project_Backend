@@ -2,22 +2,22 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import userroutes from "./routes/users.js";
-import genreroutes from "./routes/genre.js";
-import seriesroutes from "./routes/series.js";
-import fileroutes from "./routes/file.js";
-import seasonroutes from "./routes/season.js";
-import episoderoutes from "./routes/episode.js";
+import UserRoutes from "./routes/users.js";
+import GenreRoutes from "./routes/genre.js";
+import SeriesRoutes from "./routes/series.js";
+import FileRoutes from "./routes/file.js";
+import SeasonRoutes from "./routes/season.js";
+import EpisodeRoutes from "./routes/episode.js";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
-app.use("/users",userroutes);
-app.use("/genres",genreroutes);
-app.use("/series",seriesroutes);
-app.use("/files",fileroutes);
-app.use("/seasons",seasonroutes);
-app.use("/episodes",episoderoutes);
+app.use("/users",UserRoutes);
+app.use("/genres",GenreRoutes);
+app.use("/series",SeriesRoutes);
+app.use("/files",FileRoutes);
+app.use("/seasons",SeasonRoutes);
+app.use("/episodes",EpisodeRoutes);
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI,{

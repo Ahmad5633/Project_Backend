@@ -1,11 +1,11 @@
 
-import seasonModel from "../models/season.js";
+import SeasonModel from "../models/season.js";
 import authenticate from "../middlewares/authenticate.js";
 const SeasonController = {
 
     getAll :async (req, res)=> {
         try {
-            const seasons = await seasonModel.find();
+            const seasons = await SeasonModel.find();
             res.send(seasons);
         } catch (error) {
             res.status(500).send(error);
@@ -13,7 +13,7 @@ const SeasonController = {
     },
     getById:async (req, res) => {
         try {
-            const season = await seasonModel.findById(req.params.id);
+            const season = await SeasonModel.findById(req.params.id);
             res.send(season);
         } catch (error) {
             res.status(500).send(error);
@@ -32,7 +32,7 @@ const SeasonController = {
     },
     create : async (req, res) => {
         try {
-            const newSeason = await seasonModel.create(req.body);
+            const newSeason = await SeasonModel.create(req.body);
             res.send(newSeason);
         } catch (error) {
             res.status(500).send(error);
@@ -40,7 +40,7 @@ const SeasonController = {
     },
     updateSeasonById : async (req, res) => {
         try {
-            const season = await seasonModel.findByIdAndUpdate(req.params.id, req.body);
+            const season = await SeasonModel.findByIdAndUpdate(req.params.id, req.body);
             res.send(season);
         } catch (error) {
             res.status(500).send(error);
@@ -48,7 +48,7 @@ const SeasonController = {
     },
     deleteSeasonById : [authenticate , async (req, res) => {
         try {
-            const season = await seasonModel.findByIdAndDelete(req.params.id);
+            const season = await SeasonModel.findByIdAndDelete(req.params.id);
             res.send(season);
         } catch (error) {
             res.status(500).send(error);
