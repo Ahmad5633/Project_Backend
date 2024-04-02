@@ -1,5 +1,5 @@
 
-import genreModel from "../models/genre.js";
+import { genreModel } from "../models/genre.js";
 import authenticate from "../middlewares/authenticate.js";
 const GenreController = {
 

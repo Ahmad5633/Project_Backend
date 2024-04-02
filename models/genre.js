@@ -1,9 +1,9 @@
+
 import mongoose from "mongoose";
-
-const schema = mongoose.Schema({
-    id: { type: Number, required: true, unique: true, index: true },
+const schema = mongoose.Schema(
+  {
     name: { type: String, required: true },
-},
-{ timestamps: true });
-
-export default mongoose.model("Genre", schema);
+  },
+  { timestamps: true }
+);
+export const genreModel = mongoose.model("Genre", schema);
