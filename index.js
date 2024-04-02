@@ -7,6 +7,7 @@ import genreroutes from "./routes/genre.js";
 import seriesroutes from "./routes/series.js";
 import fileroutes from "./routes/file.js";
 import seasonroutes from "./routes/season.js";
+import episoderoutes from "./routes/episode.js";
 
 const app = express();
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use("/genres",genreroutes);
 app.use("/series",seriesroutes);
 app.use("/files",fileroutes);
 app.use("/seasons",seasonroutes);
+app.use("/episodes",episoderoutes);
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI,{
