@@ -1,4 +1,4 @@
-import UerModel from "../models/users.js";
+import UerModel from "../models/user.js";
 import JWT from "jsonwebtoken";
 import Authenticate from "../middlewares/authenticate.js";
 const UserController = {

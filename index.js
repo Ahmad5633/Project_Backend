@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import UserRoutes from "./routes/users.js";
+import UserRoutes from "./routes/user.js";
 import GenreRoutes from "./routes/genre.js";
 import SeriesRoutes from "./routes/series.js";
 import FileRoutes from "./routes/file.js";
