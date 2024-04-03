@@ -10,4 +10,4 @@ const schema = mongoose.Schema({
  { timestamps: true }
 );
 
-export default mongoose.model("File", schema);
+export const FileModel = mongoose.model("File", schema);

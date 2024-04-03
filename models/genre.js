@@ -5,4 +5,4 @@ const schema = mongoose.Schema({
 },
 { timestamps: true });
 
-export default mongoose.model("Genre", schema);
+export const GenreModel = mongoose.model("Genre", schema);
