@@ -2,6 +2,7 @@ import { SeasonModel, EpisodeModel } from "../models/index.js";
 
 export const seasonServices = {
   add: async (data) => {
+    console.log(data)
     return SeasonModel.create(data);
   },
   getAll: async () => {

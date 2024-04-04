@@ -5,8 +5,8 @@ export const SeriesSchema = {
     body: Joi.object().keys({
       name: Joi.string().required(),
       description: Joi.string().required(),
-      trailer_id: Joi.string().required(),
-      thumbnail_id: Joi.string().required(),
+      trailer_id: Joi.string(),
+      thumbnail_id: Joi.string(),
     }),
   },
   update: {

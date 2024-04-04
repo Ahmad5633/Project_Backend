@@ -4,8 +4,9 @@ import { httpResponse } from "../utils/index.js";
 export const seasonController = {
   add: async (req, res) => {
     try {
+      console.log("first point",req.body)
       const data = await seasonServices.add(req.body);
-      console.log(data);
+      console.log("last point", data)
       return httpResponse.CREATED(res, data);
     } catch (error) {
       return httpResponse.INTERNAL_SERVER_ERROR(res, error);
