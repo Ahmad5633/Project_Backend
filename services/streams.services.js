@@ -29,7 +29,6 @@ export const streamServices = {
     return StreamModel.findById(id).populate("user_id");
   },
   getSES: async (id) => {
-    // Find the stream by ID
     const stream = await StreamModel.findById(id);
     if (!stream) {
       return "Stream not found";
@@ -38,16 +37,13 @@ export const streamServices = {
     if (!episode) {
       return "this stream has no episode";
     }
-    // Find the season associated with the episode
     const season = await SeasonModel.findById(episode.season_id);
     if (!season) {
       return "no season found";
     }
-    // Return the season information
     return season;
   },
   getSESS: async (id) => {
-    // Find the stream by ID
     const stream = await StreamModel.findById(id);
     if (!stream) {
       return "Stream not found";
@@ -56,49 +52,39 @@ export const streamServices = {
     if (!episode) {
       return "this stream has no episode";
     }
-    // Find the season associated with the episode
     const season = await SeasonModel.findById(episode.season_id);
     if (!season) {
       return "no season found";
     }
-    //Find the series associated with the season
     const series = await SeriesModel.findById(season.series_id);
     if (!series) {
       return "no season found";
     }
-    // Return the season information
     return series;
   },
   getSESGG: async (id) => {
-    // Find the stream by ID
     const stream = await StreamModel.findById(id);
-    console.log(stream);
     if (!stream) {
       return "Stream not found";
     }
     const episode = await EpisodeModel.findById(stream.episode_id);
-    console.log(episode);
     if (!episode) {
       return "this stream has no episode";
     }
-    // Find the season associated with the episode
     const season = await SeasonModel.findById(episode.season_id);
     console.log(season);
     if (!season) {
       return "no season found";
     }
-    //Find the genreSeries associated with the season
     const genreSeries = await GenreSeriesModel.findOne(season.series_id);
     console.log(genreSeries);
     if (!genreSeries) {
       return "no season found";
     }
-    //Find the Genre associated with genreSeries
     const genre = await GenreModel.findById(genreSeries.genre_id);
     if (!genre) {
       return "no season found";
     }
-    // Return the season information
     return genre;
   },
 };

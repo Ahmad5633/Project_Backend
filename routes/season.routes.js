@@ -4,12 +4,11 @@ import { validate } from "../middleware/index.js";
 import { seasonSchema } from "../validations/index.js";
 
 const route = express.Router();
-route.post("/",seasonController.add);
-// route.post("/", validate(seasonSchema.add), seasonController.add); //  => Create a new season
-route.get("/", seasonController.getAll); // => Get all seasons
-route.get("/:id", seasonController.getOne); // => Get a season by id
-route.patch("/:id", seasonController.update); // => Update a season by id
-route.delete("/:id", seasonController.delete); // => Delete a season by id
-route.get("/:id/episodes", seasonController.getAllEpisodeById); // => Get all episodes of a season by season id
+route.post("/", validate(seasonSchema.add), seasonController.add); 
+route.get("/", seasonController.getAll);
+route.get("/:id", seasonController.getOne);
+route.patch("/:id", seasonController.update); 
+route.delete("/:id", seasonController.delete); 
+route.get("/:id/episodes", seasonController.getAllEpisodeById);
 
 export default route;

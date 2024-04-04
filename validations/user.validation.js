@@ -22,9 +22,5 @@ export const UserValidationSchema = {
         password: Joi.string().required().min(8),
       }),
     },
-    // id: {
-    //   params: Joi.object().keys({
-    //     id: Joi.string().required().min(12),
-    //   }),
   },
 };
