@@ -11,7 +11,8 @@ export const UserService = {
   },
 
   add: async (body) => {
-    return UserModel.create({ ...body });
+    console.log(body);
+    return await UserModel.create(body);
   },
 
   delete: async (id) => {
