@@ -1,32 +1,67 @@
-// googleAuth.routes.js
-
-import express from 'express';
-import passport from 'passport';
-import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
+import express from "express";
+import passport from "passport";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 const router = express.Router();
 
-// Passport configuration
-passport.use(new GoogleStrategy({
-    clientID: '614779105321-m9tutb8g9u82mlrto69jnc7k1ia8vtqa.apps.googleusercontent.com',
-    clientSecret: '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',
-    callbackURL: "http://localhost:3000/auth/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
+const CLIENT_URL = "http://localhost:3000/";
+
+// Configure Passport to use Google OAuth
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: "544547814231-hrsiuc6qcfe9b0ndi6qmf70shh5m5pbo.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: "/auth/google/callback",
+    },
+    (accessToken, refreshToken, profile, done) => {
       return done(null, profile);
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+// Google authentication route
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+// Google authentication callback route
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
+
+// Route to handle successful login
+router.get("/login/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: "Successfully logged in",
+      user: req.user,
+    });
   }
-));
+});
 
-router.use(passport.initialize());
-router.use(passport.session());
-
-router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/error' }),
-  (req, res) => {
-    // Successful authentication, redirect success.
-    res.redirect('/success');
+// Route to handle failed login
+router.get("/login/failed", (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: "Login failed",
   });
+});
+
+// Logout route
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect(CLIENT_URL);
+});
 
 export default router;
