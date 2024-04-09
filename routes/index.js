@@ -1,5 +1,4 @@
 import express from "express";
-import googleAuth from "./googleAuth.routes.js";
 import forgetPassword from "./forgetPassword.js";
 import UserRoutes from "./user.routes.js";
 import GenreRoutes from "./genres.routes.js";
@@ -20,7 +19,6 @@ unProtectedRouter.use("/episodes",EpisodeRoutes);
 unProtectedRouter.use("/streams",StreamRoutes);
 unProtectedRouter.use("/files",FileRoutes);
 unProtectedRouter.use("/password",forgetPassword);
-unProtectedRouter.use("/googleAuth",googleAuth);
 
 
 export { unProtectedRouter };
