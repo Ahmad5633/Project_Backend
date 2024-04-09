@@ -11,7 +11,6 @@ const transporter = nodemailer.createTransport({
     pass : config.env.password ,
   }
 });
-// sgMail.setApiKey(config.env.api_key);
 
 const otpStorage = new Map(); 
 
@@ -31,20 +30,6 @@ router.post("/forget", async (req, res) => {
     const otp = generateOTP();
     otpStorage.set(email, otp);
 
-//     await sgMail.send({
-//       to: email,
-//       from: "freelancerboy97@gmail.com",
-//       subject: "Password Reset OTP",
-//       text: `Your OTP for password reset is: ${otp}`,
-//     });
-
-//     res.json({ success: true, message: "OTP sent successfully" });
-//   } catch (error) {
-//     console.error("Error sending OTP:", error);
-//     res.status(500).json({ success: false, message: "Failed to send OTP" });
-//   }
-// });
- // Send email using Nodemailer
  await transporter.sendMail({
   from: 'your_email@gmail.com',
   to: email,
