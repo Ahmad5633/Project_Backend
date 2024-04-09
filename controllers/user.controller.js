@@ -31,8 +31,8 @@ export const UserController = {
   },
   update: async (req, res) => {
     try {
-      const data = await UserService.delete(req.params.id, req.body);
-      return httpResponse.SUCCESS(res, data);
+      const data = await UserService.update(req.params.id, req.body);
+      return httpResponse.SUCCESS(res,data);
     } catch (error) {
       return httpResponse.INTERNAL_SERVER_ERROR(res, error);
     }

@@ -7,6 +7,7 @@ import SeasonRoutes from "./season.routes.js";
 import EpisodeRoutes from "./episode.routes.js";
 import StreamRoutes from "./streams.routes.js";
 import FileRoutes from "./file.routes.js";
+import googleAuth from "./googleAuth.routes.js";
 
 const unProtectedRouter = express.Router();
 unProtectedRouter.use(express.json());
@@ -19,6 +20,7 @@ unProtectedRouter.use("/episodes",EpisodeRoutes);
 unProtectedRouter.use("/streams",StreamRoutes);
 unProtectedRouter.use("/files",FileRoutes);
 unProtectedRouter.use("/password",forgetPassword);
+unProtectedRouter.use("/auth",googleAuth);
 
 
 export { unProtectedRouter };
