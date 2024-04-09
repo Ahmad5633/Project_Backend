@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
 import { unProtectedRouter } from "./routes/index.js";
 const app = express();
 app.use("/", unProtectedRouter);
