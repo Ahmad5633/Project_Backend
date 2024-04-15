@@ -3,6 +3,7 @@ import sgMail from "@sendgrid/mail";
 import { UserModel } from "../models/user.js";
 import config from "../config/index.js";
 import nodemailer from "nodemailer";
+import bcrypt from "bcrypt";
 const router = express.Router();
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -58,7 +59,10 @@ router.post("/reset", async (req, res) => {
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
-    user.password = newPassword;
+    const salt = await bcrypt.genSalt();
+      const passwordHash = await bcrypt.hash(newPassword, salt);
+    user.password = passwordHash;
+    console.log(passwordHash)
     await user.save();
     otpStorage.delete(email);
 
