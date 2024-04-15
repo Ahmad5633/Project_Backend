@@ -1,3 +1,4 @@
+// import { closeDelimiter } from "ejs";
 import { UserModel } from "../models/index.js";
 import { StreamModel } from "../models/index.js";
 import mongoose from "mongoose";
@@ -14,7 +15,11 @@ export const UserService = {
     console.log(body);
     return await UserModel.create(body);
   },
-
+  update: async (id, data) => {
+    console.log(data);
+    console.log(id);
+    return UserModel.findByIdAndUpdate(id, data, { new: true });
+  },
   delete: async (id) => {
     return UserModel.findByIdAndDelete(id);
   },
